@@ -20,51 +20,52 @@
 	let loaded = false;
 
 	onMount(async () => {
-		theme.set(localStorage.theme);
-		// Check Backend Status
-		const backendConfig = await getBackendConfig();
+		goto('/about');
+		// theme.set(localStorage.theme);
+		// // Check Backend Status
+		// const backendConfig = await getBackendConfig();
 
-		if (backendConfig) {
-			// Save Backend Status to Store
-			await config.set(backendConfig);
-			if ($config.default_locale) {
-				initI18n($config.default_locale);
-			} else {
-				initI18n();
-			}
+		// if (backendConfig) {
+		// 	// Save Backend Status to Store
+		// 	await config.set(backendConfig);
+		// 	if ($config.default_locale) {
+		// 		initI18n($config.default_locale);
+		// 	} else {
+		// 		initI18n();
+		// 	}
 
-			await WEBUI_NAME.set(backendConfig.name);
-			console.log(backendConfig);
+		// 	await WEBUI_NAME.set(backendConfig.name);
+		// 	console.log(backendConfig);
+		// 	console.log({ config: $config });
+		// 	if ($config) {
+		// 		if (localStorage.token) {
+		// 			// Get Session User Info
+		// 			const sessionUser = await getSessionUser(localStorage.token).catch((error) => {
+		// 				toast.error(error);
+		// 				return null;
+		// 			});
 
-			if ($config) {
-				if (localStorage.token) {
-					// Get Session User Info
-					const sessionUser = await getSessionUser(localStorage.token).catch((error) => {
-						toast.error(error);
-						return null;
-					});
+		// 			if (sessionUser) {
+		// 				// Save Session User to Store
+		// 				await user.set(sessionUser);
+		// 			} else {
+		// 				// Redirect Invalid Session User to /auth Page
+		// 				localStorage.removeItem('token');
+		// 				await goto('/auth');
+		// 			}
+		// 		} else {
+		// 			await goto('/auth');
+		// 		}
+		// 	}
+		// } else {
+		// 	// Redirect to /error when Backend Not Detected
+		// 	await goto(`/error`);
+		// }
 
-					if (sessionUser) {
-						// Save Session User to Store
-						await user.set(sessionUser);
-					} else {
-						// Redirect Invalid Session User to /auth Page
-						localStorage.removeItem('token');
-						await goto('/auth');
-					}
-				} else {
-					await goto('/auth');
-				}
-			}
-		} else {
-			// Redirect to /error when Backend Not Detected
-			await goto(`/error`);
-		}
+		// await tick();
 
-		await tick();
-
-		document.getElementById('splash-screen')?.remove();
-		loaded = true;
+		// document.getElementById('splash-screen')?.remove();
+		// loaded = true;
 	});
 </script>
 
